@@ -1,29 +1,3 @@
-/**************************************************************************************
-
-    Palindrome tree. Useful structure to deal with palindromes in strings. O(N)
-
-    This code counts number of palindrome substrings of the string.
-    Based on problem 1750 from informatics.mccme.ru:
-
-**************************************************************************************/
-
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <algorithm>
-#include <vector>
-#include <set>
-#include <map>
-#include <string>
-#include <utility>
-#include <cstring>
-#include <cassert>
-#include <cmath>
-#include <stack>
-#include <queue>
-
-using namespace std;
-
 const int MAXN = 105000;
 
 struct node {
@@ -87,9 +61,6 @@ void initTree() {
 }
 
 int main() {
-    //assert(freopen("input.txt", "r", stdin));
-    //assert(freopen("output.txt", "w", stdout));
-
     gets(s);
     len = strlen(s);
 

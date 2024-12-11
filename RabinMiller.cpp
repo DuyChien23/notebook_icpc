@@ -1,11 +1,6 @@
 // From https://github.com/SnapDragon64/ContestLibrary/blob/master/math.h
 // which also has specialized versions for 32-bit and 42-bit
-//
-// Tested:
-// - https://oj.vnoi.info/problem/icpc22_national_c (fastest solution)
-// - https://www.spoj.com/problems/PON/
 
-// Rabin miller {{{
 inline uint64_t mod_mult64(uint64_t a, uint64_t b, uint64_t m) {
     return __int128_t(a) * b % m;
 }
@@ -57,4 +52,3 @@ bool is_prime(uint64_t n) {
     }
     return true;
 }
-// }}}

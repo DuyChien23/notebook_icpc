@@ -1,27 +1,3 @@
-// NOTE:
-// - Base 10^k. If need base 2^k, see submissions in:
-//   https://www.spoj.com/problems/PBBN2/     (>= 0 only, operations: *, power, xor)
-//   https://www.spoj.com/problems/PELLFOUR/  (see CPP, older submissions)
-//   https://codeforces.com/contest/504/submission/42348976  (with negative, several operations)
-//
-// Tested:
-// - https://www.e-olymp.com/en/problems/266: Comparison
-// - https://www.e-olymp.com/en/problems/267: Subtraction
-// - https://www.e-olymp.com/en/problems/271: Multiplication
-// - https://www.e-olymp.com/en/problems/272: Multiplication
-// - https://www.e-olymp.com/en/problems/313: Addition
-// - https://www.e-olymp.com/en/problems/314: Addition/Subtraction
-// - https://www.e-olymp.com/en/problems/317: Multiplication (simple / karatsuba / fft)
-// - https://www.e-olymp.com/en/problems/1327: Multiplication
-// - https://www.e-olymp.com/en/problems/1328
-// - VOJ BIGNUM: Addition, Subtraction, Multiplication.
-// - SGU 111: sqrt
-// - SGU 193
-// - SPOJ MUL, VFMUL: Multiplication.
-// - SPOJ FDIV, VFDIV: Division.
-// - SPOJ SQRROOT: sqrt
-
-// BigInt {{{
 const int BASE_DIGITS = 9;
 const int BASE = 1000000000;
 
@@ -29,14 +5,9 @@ struct BigInt {
     int sign;
     vector<int> a;
 
-    // -------------------- Constructors -------------------- 
-    // Default constructor.
     BigInt() : sign(1) {}
+    BigInt(long long v) {*this = v;}
 
-    // Constructor from long long.
-    BigInt(long long v) {
-        *this = v;
-    }
     BigInt& operator = (long long v) {
         sign = 1;
         if (v < 0) {
@@ -322,20 +293,6 @@ struct BigInt {
             long long cur = a[i] * (long long) v + carry;
             carry = (int) (cur / BASE);
             a[i] = (int) (cur % BASE);
-            //asm("divl %%ecx" : "=a"(carry), "=d"(a[i]) : "A"(cur), "c"(base));
-            /*
-             int val;
-             __asm {
-             lea esi, cur
-             mov eax, [esi]
-             mov edx, [esi+4]
-             mov ecx, base
-             div ecx
-             mov carry, eax
-             mov val, edx;
-             }
-             a[i] = val;
-             */
         }
         trim();
     }
@@ -594,4 +551,3 @@ struct BigInt {
         return res / norm;
     }
 };
-// }}}

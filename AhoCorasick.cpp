@@ -1,10 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-typedef pair<ll, ll> II;
-const int N = 2e5 + 5;
-
-
 const int ALP = 26;
 
 struct Node{
@@ -91,15 +84,4 @@ void Lalisa(){
        ll res = 0;
        for(int i = 1; i < n; i ++) res += pref[i] * 1ll * suf[i + 1];
        cout << res << "\n";
-}
-
-int main(){
-       //freopen("test.inp", "r", stdin);
-       //freopen("test.out", "w", stdout);
-       ios_base::sync_with_stdio(false);
-       cin.tie(0);
-       int nTest = 1;
-       //cin >> nTest;
-       while(nTest --) Lalisa();
-       return 0;
 }

@@ -6,14 +6,6 @@
 // - sa = suffix_array(s, 'a', 'z')
 // - lcp = LCP(s, sa)
 //   lcp[i] = LCP(sa[i], sa[i+1])
-//
-// Tested:
-// - SA https://judge.yosupo.jp/problem/suffixarray
-// - SA https://www.spoj.com/problems/SARRAY/
-// - LCP https://judge.yosupo.jp/problem/number_of_substrings
-// Suffix Array {{{
-// Copied from https://judge.yosupo.jp/submission/52300
-// Helper functions {{{
 void induced_sort(const std::vector<int>& vec, int val_range,
                   std::vector<int>& SA, const std::vector<bool>& sl,
                   const std::vector<int>& lms_idx) {
@@ -98,7 +90,6 @@ std::vector<int> suffix_array(const ContainerT& s, const ElemT first = 'a',
     ret.erase(ret.begin());
     return ret;
 }
-// Author: https://codeforces.com/blog/entry/12796?#comment-175287
 // Uses kasai's algorithm linear in time and space
 std::vector<int> LCP(const std::string& s, const std::vector<int>& sa) {
     int n = s.size(), k = 0;
@@ -118,9 +109,6 @@ std::vector<int> LCP(const std::string& s, const std::vector<int>& sa) {
 }
 // }}}
 // Number of distinct substrings {{{
-// Tested:
-// - https://judge.yosupo.jp/problem/number_of_substrings
-// - https://www.spoj.com/problems/SUBST1/
 int64_t cnt_distinct_substrings(const std::string& s) {
     auto lcp = LCP(s, suffix_array(s, 0, 255));
     return s.size() * (int64_t) (s.size() + 1) / 2
@@ -128,10 +116,6 @@ int64_t cnt_distinct_substrings(const std::string& s) {
 }
 // }}}
 // K-th distinct substring {{{
-// Tested:
-// - https://cses.fi/problemset/task/2108
-// - https://www.spoj.com/problems/SUBLEX/
-
 // Consider all distinct substring of string `s` in lexicographically increasing
 // order. Find k-th substring.
 //
@@ -148,9 +132,7 @@ std::vector<std::pair<int,int>> kth_distinct_substring(
     auto sa = suffix_array(s, 0, 255);
     auto lcp = LCP(s, sa);
     int n = s.size();
-    
-    // for each suffix (in increasing order), we count how many new distinct
-    // substrings it create
+
     std::vector<int64_t> n_new_substrs(n);
     for (int i = 0; i < n; ++i) {
         int substr_len = n - sa[i];
@@ -177,11 +159,6 @@ std::vector<std::pair<int,int>> kth_distinct_substring(
 // given string S and Q queries pat_i, for each query, count how many
 // times pat_i appears in S
 // O(min(|S|, |pat|) * log(|S|)) per query
-//
-// Tested:
-// - (yes / no) https://cses.fi/problemset/task/2102
-// - (count) https://cses.fi/problemset/task/2103
-// - (position; need RMQ) https://cses.fi/problemset/task/2104
 int cnt_occurrences(const string& s, const vector<int>& sa, const string& pat) {
     int n = s.size(), m = pat.size();
     assert(n == (int) sa.size());
@@ -202,16 +179,12 @@ int cnt_occurrences(const string& s, const vector<int>& sa, const string& pat) {
     };
     auto l = std::partition_point(sa.begin(), sa.end(), f);
     auto r = std::partition_point(l, sa.end(), g);
-    // To find first occurrence, return min of sa in range [l, r)
-    // See https://cses.fi/problemset/task/2104
+
     return std::distance(l, r);
 }
-// }}}
 // Count substring occurrences using hash {{{
 // If hash array can be pre-computed, can answer each query in
 // O(log(|S|) * log(|S| + |pat|)
-// Tested
-// - https://oj.vnoi.info/problem/icpc22_mt_b
 #include "./hash.h"
 int cnt_occurrences_hash(
         const vector<int>& sa,        // suffix array
@@ -243,12 +216,8 @@ int cnt_occurrences_hash(
     auto r = std::partition_point(l, sa.end(), g);
     return std::distance(l, r);
 }
-// }}}
 // Returns length of LCS of strings s & t {{{
 // O(N)
-// Tested:
-// - https://www.spoj.com/problems/LCS/
-// - https://www.spoj.com/problems/ADAPHOTO/
 int longestCommonSubstring(const string& s, const string& t) {
     char c = 127;
     string combined = s + c + t;
@@ -272,11 +241,8 @@ int longestCommonSubstring(const string& s, const string& t) {
     }
     return res;
 }
-// }}}
+
 // Returns length of LCS of n strings {{{
-// Tested:
-// - https://www.spoj.com/problems/LCS2/
-// - https://www.spoj.com/problems/LONGCS
 #include "../DataStructure/RMQ.h"
 int longestCommonSubstring(const std::vector<std::string> strs) {
     char c = 127;
@@ -327,4 +293,3 @@ int longestCommonSubstring(const std::vector<std::string> strs) {
     }
     return res;
 }
-// }}}

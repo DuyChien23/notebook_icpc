@@ -1,6 +1,3 @@
-// Tested:
-// - https://open.kattis.com/problems/eulerianpath
-// - https://oj.vnoi.info/problem/vnoicup22_final_c
 struct EulerDirected {
     EulerDirected(int _n) : n(_n), adj(n), in_deg(n, 0), out_deg(n, 0) {}
 
@@ -15,23 +12,19 @@ struct EulerDirected {
     std::pair<bool, std::vector<int>> solve() {
         int start = -1, last = -1;
         for (int i = 0; i < n; i++) {
-            // for all u, |in_deg(u) - out_deg(u)| <= 1
             if (std::abs(in_deg[i] - out_deg[i]) > 1) return {false, {}};
 
             if (out_deg[i] > in_deg[i]) {
-                // At most 1 vertex with out_deg[u] - in_deg[u] = 1 (start vertex)
                 if (start >= 0) return {false, {}};
                 start = i;
             }
 
             if (in_deg[i] > out_deg[i]) {
-                // At most 1 vertex with in_deg[u] - out_deg[u] = 1 (last vertex)
                 if (last >= 0) return {false, {}};
                 last = i;
             }
         }
 
-        // can start at any vertex with degree > 0
         if (start < 0) {
             for (int i = 0; i < n; i++) {
                 if (in_deg[i]) {
@@ -39,7 +32,6 @@ struct EulerDirected {
                     break;
                 }
             }
-            // no start vertex --> all vertices have degree == 0
             if (start < 0) return {true, {}};
         }
 

@@ -1,10 +1,3 @@
-// Segment tree beats
-// Tutorial:
-// - https://codeforces.com/blog/entry/57319
-// - https://www.youtube.com/watch?v=wFqKgrW1IMQ
-//
-// AC: https://www.acmicpc.net/problem/17474
-
 #include <bits/stdc++.h>
 using namespace std;
 
